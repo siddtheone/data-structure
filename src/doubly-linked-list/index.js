@@ -7,6 +7,7 @@ export class DoublyLinkedList {
 
   get(index) {
     if (index < 0 || index >= this.length) return undefined;
+    console.test = console.log;
 
     const countFromHead = index;
     const countFromTail = this.length - 1 - index;
@@ -19,7 +20,7 @@ export class DoublyLinkedList {
     const min = Math.min(countFromHead, countFromTail);
 
     while (i !== min) {
-      console.log("while", index);
+      console.test("while", index);
       res = res[from.direction];
       i++;
     }

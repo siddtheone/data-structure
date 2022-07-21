@@ -7,7 +7,17 @@ describe("doubly linked list", () => {
     dll = new DoublyLinkedList();
   });
 
-  it("gets the item from list via shortest path", () => {
+  it.only("gets the item from list via shortest path", () => {
+    const cLog = jest.spyOn(console, "test");
+    for (let i = 0; i < 10; i++) {
+      dll.push(i);
+    }
+
+    expect(dll.get(7).value).toBe(7);
+    expect(cLog).toHaveBeenCalledTimes(2);
+  });
+
+  it("gets the item from list", () => {
     for (let i = 0; i < 10; i++) {
       dll.push(i);
     }
