@@ -7,7 +7,7 @@ describe("doubly linked list", () => {
     dll = new DoublyLinkedList();
   });
 
-  it.only("gets the item from list via shortest path", () => {
+  it("gets the item from list via shortest path", () => {
     const mock = jest.fn();
     for (let i = 0; i < 10; i++) {
       dll.push(i);

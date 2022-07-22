@@ -8,22 +8,26 @@ export class DoublyLinkedList {
   get(index, onTraverse) {
     if (index < 0 || index >= this.length) return undefined;
 
-    const countFromHead = index;
-    const countFromTail = this.length - 1 - index;
-    const from =
-      countFromHead < countFromTail
-        ? { start: this.head, direction: "next" }
-        : { start: this.tail, direction: "prev" };
-    let i = 0;
-    let res = from.start;
-    const min = Math.min(countFromHead, countFromTail);
+    const isFindingInFirstHalf = index <= this.length / 2;
+    let from, i, changeCounter;
 
-    while (i !== min) {
+    if (isFindingInFirstHalf) {
+      from = { start: this.head, direction: "next" };
+      i = 0;
+      changeCounter = () => i++;
+    } else {
+      from = { start: this.tail, direction: "prev" };
+      i = this.length - 1;
+      changeCounter = () => i--;
+    }
+    let res = from.start;
+
+    while (i !== index) {
       if (typeof onTraverse === "function") {
         onTraverse();
       }
       res = res[from.direction];
-      i++;
+      changeCounter();
     }
     return res;
   }
