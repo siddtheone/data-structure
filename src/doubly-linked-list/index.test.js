@@ -8,13 +8,13 @@ describe("doubly linked list", () => {
   });
 
   it.only("gets the item from list via shortest path", () => {
-    const cLog = jest.spyOn(console, "test");
+    const mock = jest.fn();
     for (let i = 0; i < 10; i++) {
       dll.push(i);
     }
 
-    expect(dll.get(7).value).toBe(7);
-    expect(cLog).toHaveBeenCalledTimes(2);
+    expect(dll.get(7, mock).value).toBe(7);
+    expect(mock).toBeCalledTimes(2);
   });
 
   it("gets the item from list", () => {
