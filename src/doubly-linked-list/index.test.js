@@ -58,6 +58,25 @@ describe("doubly linked list", () => {
     dll = new DoublyLinkedList();
   });
 
+  it("remove the item on given index", () => {
+    dll.push(0);
+    dll.push(1);
+    dll.push(2);
+
+    expect(dll.remove(-1)).toBeFalsy();
+    expect(dll.remove(3)).toBeFalsy();
+    expect(dll.length).toBe(3);
+
+    expect(dll.remove(1)).toEqual({ value: 1, next: null, prev: null });
+    expect(dll.length).toBe(2);
+
+    expect(dll.head.value).toBe(0);
+    expect(dll.head.next.value).toBe(2);
+
+    expect(dll.tail.value).toBe(2);
+    expect(dll.tail.prev.value).toBe(0);
+  });
+
   it("returns undefined when setting value at invalid index", () => {
     expect(dll.set(-1, -1)).toBeUndefined();
   });

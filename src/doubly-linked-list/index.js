@@ -5,6 +5,28 @@ export class DoublyLinkedList {
     this.length = 0;
   }
 
+  remove(index) {
+    if (index < 0 || index >= this.length) return false;
+
+    if (index === 0) {
+      return this.shift();
+    } else if (index === this.length - 1) {
+      return this.pop();
+    } else {
+      const nodeToRemove = this.get(index);
+      const prevNode = nodeToRemove.prev;
+      const nextNode = nodeToRemove.next;
+
+      prevNode.next = nextNode;
+      nextNode.prev = prevNode;
+
+      nodeToRemove.next = null;
+      nodeToRemove.prev = null;
+      this.length--;
+      return nodeToRemove;
+    }
+  }
+
   insert(index, value) {
     if (index < 0 || index > this.length) return false;
 
