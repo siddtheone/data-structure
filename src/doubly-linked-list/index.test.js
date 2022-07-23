@@ -1,10 +1,74 @@
 import { DoublyLinkedList, Node } from ".";
 
+describe("insertion on doubly linked list", () => {
+  let dll;
+
+  beforeEach(() => {
+    dll = new DoublyLinkedList();
+  });
+
+  it("inserting at invalid index returns false", () => {
+    dll.push(0);
+    dll.push(1);
+    dll.push(2);
+
+    expect(dll.insert(-1, 0)).toBeFalsy();
+    expect(dll.length).toBe(3);
+
+    expect(dll.insert(4, 0)).toBeFalsy();
+    expect(dll.length).toBe(3);
+  });
+
+  it("inserting works for beginning and end", () => {
+    dll.push(0);
+    dll.push(1);
+    dll.push(2);
+
+    expect(dll.insert(0, -1)).toBeTruthy();
+    expect(dll.length).toBe(4);
+    expect(dll.head.value).toBe(-1);
+    expect(dll.head.next.value).toBe(0);
+
+    expect(dll.insert(4, 3)).toBeTruthy();
+    expect(dll.length).toBe(5);
+    expect(dll.tail.value).toBe(3);
+  });
+
+  it("check connections after insertion in between", () => {
+    dll.push(0);
+    dll.push(2);
+
+    expect(dll.insert(1, 1)).toBeTruthy();
+    expect(dll.length).toBe(3);
+
+    expect(dll.head.prev).toBeNull();
+    expect(dll.head.value).toBe(0);
+    expect(dll.head.next.value).toBe(1);
+
+    expect(dll.tail.next).toBeNull();
+    expect(dll.tail.value).toBe(2);
+    expect(dll.tail.prev.value).toBe(1);
+  });
+});
+
 describe("doubly linked list", () => {
   let dll;
 
   beforeEach(() => {
     dll = new DoublyLinkedList();
+  });
+
+  it("returns undefined when setting value at invalid index", () => {
+    expect(dll.set(-1, -1)).toBeUndefined();
+  });
+
+  it("sets the item in list via shortest path", () => {
+    for (let i = 0; i < 10; i++) {
+      dll.push(i);
+    }
+
+    const newValue = 77;
+    expect(dll.set(7, newValue).value).toBe(newValue);
   });
 
   it("gets the item from list via shortest path", () => {

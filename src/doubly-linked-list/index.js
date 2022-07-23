@@ -5,6 +5,39 @@ export class DoublyLinkedList {
     this.length = 0;
   }
 
+  insert(index, value) {
+    if (index < 0 || index > this.length) return false;
+
+    if (index === 0) {
+      return !!this.unshift(value);
+    } else if (index === this.length) {
+      return !!this.push(value);
+    } else {
+      const prev = this.get(index - 1);
+      const nextNode = prev.next;
+      const newNode = new Node(value);
+
+      prev.next = newNode;
+      newNode.prev = prev;
+
+      nextNode.prev = newNode;
+      newNode.next = nextNode;
+
+      this.length++;
+
+      return true;
+    }
+  }
+
+  set(index, value) {
+    const current = this.get(index);
+    if (current) {
+      current.value = value;
+    }
+
+    return current;
+  }
+
   get(index, onTraverse) {
     if (index < 0 || index >= this.length) return undefined;
 
