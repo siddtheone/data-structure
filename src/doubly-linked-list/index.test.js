@@ -13,7 +13,6 @@ describe("insertion on doubly linked list", () => {
     }
 
     dll.reverse();
-    console.log(dll);
     expect(dll.head.prev).toBeNull();
     expect(dll.head.value).toBe(3);
     expect(dll.head.next.value).toBe(2);

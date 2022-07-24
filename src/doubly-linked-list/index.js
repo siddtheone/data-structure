@@ -6,13 +6,22 @@ export class DoublyLinkedList {
   }
 
   reverse() {
-    if (this.length < 2) return this;
+    // Non recursive
+    [this.head, this.tail] = [this.tail, this.head];
+    let node = this.tail;
 
-    const shifted = this.shift();
-    const popped = this.pop();
-    if (this.length > 1) this.reverse();
-    this.unshift(popped.value);
-    this.push(shifted.value);
+    while (node) {
+      [node.prev, node.next] = [node.next, node.prev];
+      node = node.prev;
+    }
+
+    // Recursive
+    // if (this.length < 2) return this;
+    // const shifted = this.shift();
+    // const popped = this.pop();
+    // if (this.length > 1) this.reverse();
+    // this.unshift(popped.value);
+    // this.push(shifted.value);
   }
 
   remove(index) {
