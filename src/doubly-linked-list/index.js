@@ -5,6 +5,16 @@ export class DoublyLinkedList {
     this.length = 0;
   }
 
+  reverse() {
+    if (this.length < 2) return this;
+
+    const shifted = this.shift();
+    const popped = this.pop();
+    if (this.length > 1) this.reverse();
+    this.unshift(popped.value);
+    this.push(shifted.value);
+  }
+
   remove(index) {
     if (index < 0 || index >= this.length) return false;
 

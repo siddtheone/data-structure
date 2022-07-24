@@ -7,6 +7,26 @@ describe("insertion on doubly linked list", () => {
     dll = new DoublyLinkedList();
   });
 
+  it("reverse the list", () => {
+    for (let i = 0; i < 4; i++) {
+      dll.push(i);
+    }
+
+    dll.reverse();
+    console.log(dll);
+    expect(dll.head.prev).toBeNull();
+    expect(dll.head.value).toBe(3);
+    expect(dll.head.next.value).toBe(2);
+    expect(dll.head.next.next.value).toBe(1);
+    expect(dll.head.next.next.next.value).toBe(0);
+
+    expect(dll.tail.next).toBeNull();
+    expect(dll.tail.value).toBe(0);
+    expect(dll.tail.prev.value).toBe(1);
+    expect(dll.tail.prev.prev.value).toBe(2);
+    expect(dll.tail.prev.prev.prev.value).toBe(3);
+  });
+
   it("inserting at invalid index returns false", () => {
     dll.push(0);
     dll.push(1);
