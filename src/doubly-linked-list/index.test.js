@@ -1,6 +1,6 @@
 import { DoublyLinkedList, Node } from ".";
 
-describe("insertion on doubly linked list", () => {
+describe.skip("insertion on doubly linked list", () => {
   let dll;
 
   beforeEach(() => {
@@ -70,7 +70,7 @@ describe("insertion on doubly linked list", () => {
   });
 });
 
-describe("doubly linked list", () => {
+describe.skip("doubly linked list", () => {
   let dll;
 
   beforeEach(() => {
@@ -221,12 +221,12 @@ describe("doubly linked list", () => {
   });
 });
 
-it("test Doubly linked list instance", () => {
+it.skip("test Doubly linked list instance", () => {
   const node = new DoublyLinkedList(2);
   expect(node).toEqual({ length: 0, head: null, tail: null });
 });
 
-it("test node instance", () => {
+it.skip("test node instance", () => {
   const node = new Node(2);
   expect(node).toEqual({ value: 2, next: null, prev: null });
 });
