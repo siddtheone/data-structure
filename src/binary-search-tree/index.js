@@ -39,8 +39,6 @@ export class BinarySearchTree {
   }
 
   find(value) {
-    if (this.root === null) return false;
-
     let temp = this.root;
     while (temp) {
       if (value === temp.value) {
