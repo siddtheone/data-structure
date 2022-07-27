@@ -41,5 +41,8 @@ describe("Binary search tree", () => {
     expect(bst.find(5)).toBeTruthy();
     expect(bst.find(100)).toBeFalsy();
     expect(bst.find("anythingelse")).toBeFalsy();
+
+    const emptyBST = new BinarySearchTree();
+    expect(emptyBST.find("anythingelse")).toBeFalsy();
   });
 });
