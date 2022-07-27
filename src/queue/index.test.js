@@ -1,6 +1,6 @@
 import { Node, Queue } from ".";
 
-describe("queue", () => {
+describe.skip("queue", () => {
   let q;
 
   beforeEach(() => {
