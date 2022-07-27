@@ -16,6 +16,14 @@ describe("Binary search tree", () => {
     bst.insert(10);
     bst.insert(1);
     bst.insert(50);
-    console.log(bst);
+
+    expect(bst.root.value).toBe(5);
+    expect(bst.root.left.value).toBe(3);
+    expect(bst.root.left.left.value).toBe(1);
+
+    expect(bst.root.right.value).toBe(10);
+    expect(bst.root.right.right.value).toBe(50);
+
+    expect(bst.insert(50)).toBeUndefined();
   });
 });
