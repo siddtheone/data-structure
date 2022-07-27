@@ -37,4 +37,18 @@ export class BinarySearchTree {
       }
     }
   }
+
+  find(value) {
+    if (this.root === null) return false;
+
+    let temp = this.root;
+    while (temp) {
+      if (value === temp.value) {
+        return true;
+      }
+      temp = value < temp.value ? temp.left : temp.right;
+    }
+
+    return false;
+  }
 }

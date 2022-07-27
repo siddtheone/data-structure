@@ -26,4 +26,20 @@ describe("Binary search tree", () => {
 
     expect(bst.insert(50)).toBeUndefined();
   });
+
+  it("finds values in bst", () => {
+    bst.insert(5);
+    bst.insert(3);
+    bst.insert(10);
+    bst.insert(1);
+    bst.insert(50);
+
+    expect(bst.find(50)).toBeTruthy();
+    expect(bst.find(1)).toBeTruthy();
+    expect(bst.find(10)).toBeTruthy();
+    expect(bst.find(3)).toBeTruthy();
+    expect(bst.find(5)).toBeTruthy();
+    expect(bst.find(100)).toBeFalsy();
+    expect(bst.find("anythingelse")).toBeFalsy();
+  });
 });
