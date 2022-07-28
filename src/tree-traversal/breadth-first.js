@@ -3,7 +3,7 @@ import { Queue } from "../queue";
 export function breadthFirst(tree) {
   const nodes = [];
   const queue = new Queue();
-  if (tree.root === null) return nodes;
+  if (tree.root === null) return [null];
 
   queue.enqueue(tree.root);
   while (queue.size) {
