@@ -9,7 +9,6 @@ it("traverse tree with pre order, depth first", () => {
   const tree = new BinarySearchTree();
   expect(depthFirstPostOrder(tree)).toEqual([null]);
   [10, 6, 15, 3, 8, 20].forEach((node) => tree.insert(node));
-  console.log(tree);
   expect(depthFirstPreOrder(tree)).toEqual([10, 6, 3, 8, 15, 20]);
 });
 
