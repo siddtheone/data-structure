@@ -22,8 +22,6 @@ export class MaxBinaryHeap {
   }
 
   extractMax() {
-    if (this.values.length < 3) return this.values.shift();
-
     this._swapElementsOnIndex(0, this.values.length - 1);
     const maxNode = this.values.pop();
     this._sink();
@@ -40,14 +38,19 @@ export class MaxBinaryHeap {
     const leftChild = this.values[leftChildIndex];
     const rightChild = this.values[rightChildIndex];
 
-    if (leftChild > rightChild && node < leftChild) {
+    if (rightChild) {
+      if (leftChild > rightChild && node < leftChild) {
+        this._swapElementsOnIndex(i, leftChildIndex);
+        this._sink(leftChildIndex);
+      }
+
+      if (rightChild > leftChild && node < rightChild) {
+        this._swapElementsOnIndex(i, rightChildIndex);
+        this._sink(rightChildIndex);
+      }
+    } else if (node < leftChild) {
       this._swapElementsOnIndex(i, leftChildIndex);
       this._sink(leftChildIndex);
-    }
-
-    if (rightChild > leftChild && node < rightChild) {
-      this._swapElementsOnIndex(i, rightChildIndex);
-      this._sink(rightChildIndex);
     }
   }
 
