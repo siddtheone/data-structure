@@ -52,5 +52,6 @@ test("dequeue works for duplicate priorities", () => {
   for (let i = 0; i < 10; i++) {
     expect(duplicatePQ.dequeue()).toEqual({ value: "same", priority: 1 });
   }
+  expect(duplicatePQ.dequeue()).toBeUndefined();
   expect(duplicatePQ.values.length).toBe(0);
 });
