@@ -31,9 +31,13 @@ export class PriorityQueue {
 
   dequeue() {
     const min = this.values[0];
-    this.values[0] = this.values.pop();
 
-    this._sinkDown();
+    if (this.values.length < 2) {
+      return this.values.pop();
+    } else {
+      this.values[0] = this.values.pop();
+      this._sinkDown();
+    }
 
     return min;
   }
@@ -69,6 +73,7 @@ export class PriorityQueue {
   }
 
   _swapElementsAtIndexes(index1, index2) {
+    if (this.values.length < 2) return;
     const temp = this.values[index1];
     this.values[index1] = this.values[index2];
     this.values[index2] = temp;

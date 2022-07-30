@@ -22,9 +22,17 @@ export class MaxBinaryHeap {
   }
 
   extractMax() {
-    this._swapElementsOnIndex(0, this.values.length - 1);
-    const maxNode = this.values.pop();
-    this._sink();
+    // this._swapElementsOnIndex(0, this.values.length - 1);
+    // const maxNode = this.values.pop();
+
+    // console.log(JSON.stringify(this.values));
+    const maxNode = this.values[0];
+    if (this.values.length < 2) {
+      return this.values.pop();
+    } else {
+      this.values[0] = this.values.pop();
+      this._sink();
+    }
 
     return maxNode;
   }
@@ -55,6 +63,7 @@ export class MaxBinaryHeap {
   }
 
   _swapElementsOnIndex(index1, index2) {
+    if (this.values.length < 2) return;
     const temp = this.values[index1];
     this.values[index1] = this.values[index2];
     this.values[index2] = temp;

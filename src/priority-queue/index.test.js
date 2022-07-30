@@ -29,4 +29,7 @@ test("dequeue in priority queye", () => {
   for (let i = 1; i <= testCount; i++) {
     expect(pq.dequeue().priority).toBe(i);
   }
+
+  expect(pq.dequeue()).toBeUndefined();
+  expect(pq.values).toEqual([]);
 });
