@@ -5,20 +5,55 @@ export class MaxBinaryHeap {
 
   insert(value) {
     this.values.push(value);
-    this.rearrange();
+    this._rearrange();
   }
 
-  rearrange(index = this.values.length - 1) {
+  _rearrange(index = this.values.length - 1) {
     const parentIndex = Math.floor((index - 1) / 2);
     const parent = this.values[parentIndex];
     const node = this.values[index];
 
     if (parent < node) {
-      const temp = parent;
-      this.values[parentIndex] = this.values[index];
-      this.values[index] = temp;
+      this.values[parentIndex] = node;
+      this.values[index] = parent;
 
-      this.rearrange(parentIndex);
+      this._rearrange(parentIndex);
     }
+  }
+
+  extractMax() {
+    if (this.values.length < 3) return this.values.shift();
+
+    this._swapElementsOnIndex(0, this.values.length - 1);
+    const maxNode = this.values.pop();
+    this._sink();
+
+    return maxNode;
+  }
+
+  _sink(i = 0) {
+    const node = this.values[i];
+
+    const leftChildIndex = 2 * i + 1;
+    const rightChildIndex = 2 * i + 2;
+
+    const leftChild = this.values[leftChildIndex];
+    const rightChild = this.values[rightChildIndex];
+
+    if (leftChild > rightChild && node < leftChild) {
+      this._swapElementsOnIndex(i, leftChildIndex);
+      this._sink(leftChildIndex);
+    }
+
+    if (rightChild > leftChild && node < rightChild) {
+      this._swapElementsOnIndex(i, rightChildIndex);
+      this._sink(rightChildIndex);
+    }
+  }
+
+  _swapElementsOnIndex(index1, index2) {
+    const temp = this.values[index1];
+    this.values[index1] = this.values[index2];
+    this.values[index2] = temp;
   }
 }
