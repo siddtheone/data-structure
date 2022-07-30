@@ -20,6 +20,15 @@ test("enqueue in priority queye", () => {
   expect(values[0]).toHaveProperty("priority", 1);
 });
 
+test("enque for duplicate priorities", () => {
+  const pq = new PriorityQueue();
+  const same = ["same", 1];
+  for (let i = 0; i < 10; i++) {
+    pq.enqueue(...same);
+  }
+  expect(pq.values.length).toBe(10);
+});
+
 test("dequeue in priority queye", () => {
   const pq = new PriorityQueue();
   const testCount = 9;
@@ -32,4 +41,16 @@ test("dequeue in priority queye", () => {
 
   expect(pq.dequeue()).toBeUndefined();
   expect(pq.values).toEqual([]);
+});
+
+test("dequeue works for duplicate priorities", () => {
+  const duplicatePQ = new PriorityQueue();
+  const samePriority = ["same", 1];
+  for (let i = 0; i < 10; i++) {
+    duplicatePQ.enqueue(...samePriority);
+  }
+  for (let i = 0; i < 10; i++) {
+    expect(duplicatePQ.dequeue()).toEqual({ value: "same", priority: 1 });
+  }
+  expect(duplicatePQ.values.length).toBe(0);
 });

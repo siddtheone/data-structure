@@ -21,6 +21,15 @@ it("inserts values in binary max heap", () => {
   expect(maxHeap.values).toEqual([500, 400, 200, 100, 300]);
 });
 
+it("insert works for duplicate values", () => {
+  const maxHeap = new MaxBinaryHeap();
+  for (let i = 0; i < 10; i++) {
+    maxHeap.insert(0);
+  }
+
+  expect(maxHeap.values.length).toBe(10);
+});
+
 it("removes max value from binary max heap", () => {
   const noElementsHeap = new MaxBinaryHeap();
   expect(noElementsHeap.extractMax()).toBeUndefined();
@@ -111,4 +120,17 @@ it("removes max value from binary max heap", () => {
 
   expect(mbh.extractMax()).toBeUndefined();
   expect(mbh.values).toEqual([]);
+});
+
+it("extract works for duplicate values", () => {
+  const maxHeap = new MaxBinaryHeap();
+  for (let i = 0; i < 10; i++) {
+    maxHeap.insert(0);
+  }
+
+  for (let i = 0; i < 10; i++) {
+    expect(maxHeap.extractMax()).toBe(0);
+  }
+
+  expect(maxHeap.values.length).toBe(0);
 });
