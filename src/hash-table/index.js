@@ -31,7 +31,10 @@ export class HashTable {
     const existingValue = this.keyMap[index];
 
     if (Array.isArray(existingValue)) {
-      return existingValue.find(([keySaved]) => keySaved === key);
+      const found = existingValue.find(([keySaved]) => keySaved === key);
+      if (found) {
+        return found[1];
+      }
     }
     return undefined;
   }
