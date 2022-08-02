@@ -20,11 +20,10 @@ export class HashTable {
     const index = this._hash(key);
     const existingValue = this.keyMap[index];
     const toInsert = [key, value];
-    if (Array.isArray(existingValue)) {
-      existingValue.push(toInsert);
-    } else {
-      this.keyMap[index] = [toInsert];
+    if (!existingValue) {
+      this.keyMap[index] = [];
     }
+    this.keyMap[index].push(toInsert);
   }
 
   get(key) {
@@ -32,10 +31,7 @@ export class HashTable {
     const existingValue = this.keyMap[index];
 
     if (Array.isArray(existingValue)) {
-      const found = existingValue.find(([keySaved]) => keySaved === key);
-      if (found) {
-        return found[1];
-      }
+      return existingValue.find(([keySaved]) => keySaved === key);
     }
     return undefined;
   }
