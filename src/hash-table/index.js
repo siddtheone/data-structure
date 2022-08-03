@@ -23,7 +23,15 @@ export class HashTable {
     if (!existingValue) {
       this.keyMap[index] = [];
     }
-    this.keyMap[index].push(toInsert);
+    const prevIndex = this.keyMap[index].findIndex(
+      ([prevKey]) => prevKey === key
+    );
+
+    if (prevIndex === -1) {
+      this.keyMap[index].push(toInsert);
+    } else {
+      this.keyMap[index][prevIndex] = toInsert;
+    }
   }
 
   get(key) {
@@ -37,5 +45,30 @@ export class HashTable {
       }
     }
     return undefined;
+  }
+
+  keys() {
+    return this.keyMap.reduce((acc, entries) => {
+      acc.push(...entries.map(([key]) => key));
+      return acc;
+    }, []);
+  }
+
+  values(override = true) {
+    const values = this.keyMap.reduce(
+      (acc, entires) => {
+        if (entires) {
+          if (override) {
+            entires.forEach(([_, value]) => acc.add(value));
+          } else {
+            acc.push(...entires.map(([_, value]) => value));
+          }
+        }
+        return acc;
+      },
+      override ? new Set() : []
+    );
+
+    return override ? Array.from(values.values()) : values;
   }
 }
