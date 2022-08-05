@@ -1,3 +1,5 @@
+import { Queue } from "../queue";
+
 export class Graph {
   constructor() {
     this.adjacencyList = {};
@@ -29,5 +31,67 @@ export class Graph {
       const nodeIndex = this.adjacencyList[nodeInGraph].indexOf(node);
       this.adjacencyList[nodeInGraph].splice(nodeIndex, 1);
     });
+  }
+
+  depthFirstRecursive(node) {
+    const res = [];
+    const visited = {};
+    const adjacencyList = this.adjacencyList;
+
+    function dfsHelper(v) {
+      visited[v] = true;
+      res.push(v);
+      adjacencyList[v].forEach((e) => {
+        if (!(e in visited)) {
+          dfsHelper(e);
+        }
+      });
+    }
+
+    dfsHelper(node);
+    return res;
+  }
+
+  depthFirstIterative(node) {
+    const stack = [node];
+    const res = [];
+    const visited = {};
+    let popped;
+
+    visited[node] = true;
+    while (stack.length) {
+      popped = stack.pop();
+      res.push(popped);
+      this.adjacencyList[popped].forEach((neighbour) => {
+        if (!(neighbour in visited)) {
+          visited[neighbour] = true;
+          stack.push(neighbour);
+        }
+      });
+    }
+
+    return res;
+  }
+
+  breadthFirst(node) {
+    const res = [];
+    const queue = new Queue();
+    const visited = { [node]: true };
+    queue.enqueue(node);
+    let vertex;
+
+    while (queue.size) {
+      vertex = queue.dequeue();
+
+      res.push(vertex);
+      this.adjacencyList[vertex].forEach((neighbour) => {
+        if (!(neighbour in visited)) {
+          visited[neighbour] = true;
+          queue.enqueue(neighbour);
+        }
+      });
+    }
+
+    return res;
   }
 }

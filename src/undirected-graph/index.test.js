@@ -69,4 +69,77 @@ describe("Undirected graph", () => {
       v2: ["v1"]
     });
   });
+
+  test("depth first traversal", () => {
+    graph.addVertex("A");
+    graph.addVertex("B");
+    graph.addVertex("C");
+    graph.addVertex("D");
+    graph.addVertex("E");
+    graph.addVertex("F");
+
+    graph.addEdge("A", "B");
+    graph.addEdge("A", "C");
+    graph.addEdge("B", "D");
+    graph.addEdge("C", "E");
+    graph.addEdge("D", "E");
+    graph.addEdge("D", "F");
+    graph.addEdge("E", "F");
+
+    expect(graph.depthFirstRecursive("A")).toEqual([
+      "A",
+      "B",
+      "D",
+      "E",
+      "C",
+      "F"
+    ]);
+
+    expect(graph.depthFirstIterative("A")).toEqual([
+      "A",
+      "C",
+      "E",
+      "F",
+      "D",
+      "B"
+    ]);
+  });
+
+  test("breadth first traversal", () => {
+    graph.addVertex("A");
+    graph.addVertex("B");
+    graph.addVertex("C");
+    graph.addVertex("D");
+    graph.addVertex("E");
+    graph.addVertex("F");
+
+    graph.addEdge("A", "B");
+    graph.addEdge("A", "E");
+    graph.addEdge("B", "C");
+    graph.addEdge("B", "D");
+    graph.addEdge("C", "D");
+    graph.addEdge("D", "E");
+    graph.addEdge("D", "F");
+    graph.addEdge("E", "F");
+
+    expect(graph.breadthFirst("A")).toEqual(["A", "B", "E", "C", "D", "F"]);
+
+    const g = new Graph();
+
+    g.addVertex("A");
+    g.addVertex("B");
+    g.addVertex("C");
+    g.addVertex("D");
+    g.addVertex("E");
+    g.addVertex("F");
+
+    g.addEdge("A", "B");
+    g.addEdge("A", "C");
+    g.addEdge("B", "D");
+    g.addEdge("C", "E");
+    g.addEdge("D", "E");
+    g.addEdge("D", "F");
+    g.addEdge("E", "F");
+    expect(g.breadthFirst("A")).toEqual(["A", "B", "C", "D", "E", "F"]);
+  });
 });
