@@ -19,10 +19,10 @@ describe("Weighted graph", () => {
 
     wg.addEdge("A", "B", 5);
 
-    // expect(wg.adjacencyList).toEqual(
-    //   { A: [{ node: "B", weight: 5 }] },
-    //   { B: [{ node: "A", weight: 5 }] }
-    // );
-    console.log(JSON.stringify(wg.adjacencyList));
+    expect(wg.adjacencyList).toEqual({
+      A: [{ node: "B", weight: 5 }],
+      B: [{ node: "A", weight: 5 }]
+    });
+    console.log(wg.adjacencyList);
   });
 });
