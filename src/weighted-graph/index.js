@@ -29,18 +29,23 @@ export class WeightedGraph {
         visited
       );
 
-      const currentDistance = shortestPathToOtherFromSource[current];
-      visited[current] = true;
-
       const currentNeighbours = this.adjacencyList[current];
 
-      currentNeighbours.forEach(({ node, weight }) => {
+      for (let i = 0; i < currentNeighbours.length; i++) {
+        const { node, weight } = currentNeighbours[i];
+
+        if (node in visited) {
+          continue;
+        }
+
+        const currentDistance = shortestPathToOtherFromSource[current];
         const newDistance = currentDistance + weight;
         if (newDistance < shortestPathToOtherFromSource[node]) {
           shortestPathToOtherFromSource[node] = newDistance;
           previous[node] = current;
         }
-      });
+      }
+      visited[current] = true;
     }
 
     return previous;
