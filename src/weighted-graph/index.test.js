@@ -42,13 +42,7 @@ describe("Weighted graph", () => {
     wg.addEdge("D", "F", 1);
     wg.addEdge("E", "F", 1);
 
-    expect(wg.shortestPath("A", "E")).toEqual({
-      A: null,
-      B: "A",
-      C: "A",
-      D: "C",
-      E: "F",
-      F: "D"
-    });
+    expect(wg.shortestPath("A", "E")).toEqual(["A", "C", "D", "F", "E"]);
+    expect(wg.shortestPath("E", "A")).toEqual(["E", "F", "D", "C", "A"]);
   });
 });

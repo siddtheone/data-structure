@@ -1,4 +1,5 @@
 import { PriorityQueue } from "../priority-queue";
+import { Stack } from "../stack";
 
 export class WeightedGraph {
   constructor() {
@@ -69,20 +70,20 @@ export class WeightedGraph {
     const shortestPathToOtherFromSource = {};
     const previous = {};
     const priorityQueue = new PriorityQueue();
+    const visited = {};
 
-    Object.keys(this.adjacencyList).forEach((node) => {
+    for (let node in this.adjacencyList) {
       const distance = node === source ? 0 : Infinity;
       shortestPathToOtherFromSource[node] = distance;
       priorityQueue.enqueue(node, distance);
       previous[node] = null;
-    });
-    const visited = {};
+    }
 
     while (true) {
-      const { value: current } = priorityQueue.dequeue();
+      const current = priorityQueue.dequeue().value;
 
       if (current === destination) {
-        break;
+        return this._generatePath(previous, destination);
       }
 
       const currentNeighbours = this.adjacencyList[current];
@@ -104,7 +105,27 @@ export class WeightedGraph {
       }
       visited[current] = true;
     }
+  }
 
-    return previous;
+  _generatePath(previous, to) {
+    const stack = new Stack();
+    let node = to;
+    stack.push(to);
+    while (true) {
+      if (previous[node] === null) {
+        break;
+      }
+      stack.push(previous[node]);
+      node = previous[node];
+    }
+
+    const res = [];
+    while (true) {
+      let node = stack.pop();
+      if (node === null) break;
+      res.push(node);
+    }
+
+    return res;
   }
 }
