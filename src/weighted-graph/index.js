@@ -1,3 +1,5 @@
+import { PriorityQueue } from "../priority-queue";
+
 export class WeightedGraph {
   constructor() {
     this.adjacencyList = {};
@@ -14,20 +16,74 @@ export class WeightedGraph {
     this.adjacencyList[v2].push({ node: v1, weight });
   }
 
+  // shortestPath(source, destination) {
+  //   const shortestPathToOtherFromSource = {};
+  //   const previous = {};
+  //   Object.keys(this.adjacencyList).forEach((node) => {
+  //     shortestPathToOtherFromSource[node] = node === source ? 0 : Infinity;
+  //     previous[node] = null;
+  //   });
+  //   const visited = {};
+
+  //   while (!(destination in visited)) {
+  //     const current = this._getTheNodeOfShortedDistance(
+  //       shortestPathToOtherFromSource,
+  //       visited
+  //     );
+
+  //     const currentNeighbours = this.adjacencyList[current];
+
+  //     for (let i = 0; i < currentNeighbours.length; i++) {
+  //       const { node, weight } = currentNeighbours[i];
+
+  //       if (node in visited) {
+  //         continue;
+  //       }
+
+  //       const currentDistance = shortestPathToOtherFromSource[current];
+  //       const newDistance = currentDistance + weight;
+  //       if (newDistance < shortestPathToOtherFromSource[node]) {
+  //         shortestPathToOtherFromSource[node] = newDistance;
+  //         previous[node] = current;
+  //       }
+  //     }
+  //     visited[current] = true;
+  //   }
+
+  //   return previous;
+  // }
+
+  // _getTheNodeOfShortedDistance(shortedPath, visited) {
+  //   let shortedDistance = Infinity;
+  //   let nodeToPick;
+  //   Object.entries(shortedPath).forEach(([node, distance]) => {
+  //     if (!(node in visited) && distance < shortedDistance) {
+  //       nodeToPick = node;
+  //       shortedDistance = distance;
+  //     }
+  //   });
+  //   return nodeToPick;
+  // }
+
   shortestPath(source, destination) {
     const shortestPathToOtherFromSource = {};
     const previous = {};
+    const priorityQueue = new PriorityQueue();
+
     Object.keys(this.adjacencyList).forEach((node) => {
-      shortestPathToOtherFromSource[node] = node === source ? 0 : Infinity;
+      const distance = node === source ? 0 : Infinity;
+      shortestPathToOtherFromSource[node] = distance;
+      priorityQueue.enqueue(node, distance);
       previous[node] = null;
     });
     const visited = {};
 
-    while (!(destination in visited)) {
-      const current = this._getTheNodeOfShortedDistance(
-        shortestPathToOtherFromSource,
-        visited
-      );
+    while (true) {
+      const { value: current } = priorityQueue.dequeue();
+
+      if (current === destination) {
+        break;
+      }
 
       const currentNeighbours = this.adjacencyList[current];
 
@@ -43,23 +99,12 @@ export class WeightedGraph {
         if (newDistance < shortestPathToOtherFromSource[node]) {
           shortestPathToOtherFromSource[node] = newDistance;
           previous[node] = current;
+          priorityQueue.enqueue(node, newDistance);
         }
       }
       visited[current] = true;
     }
 
     return previous;
-  }
-
-  _getTheNodeOfShortedDistance(shortedPath, visited) {
-    let shortedDistance = Infinity;
-    let nodeToPick;
-    Object.entries(shortedPath).forEach(([node, distance]) => {
-      if (!(node in visited) && distance < shortedDistance) {
-        nodeToPick = node;
-        shortedDistance = distance;
-      }
-    });
-    return nodeToPick;
   }
 }
