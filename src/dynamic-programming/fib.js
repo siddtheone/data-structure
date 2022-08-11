@@ -1,23 +1,11 @@
 export const fib = (number) =>
   number <= 2 ? 1 : fib(number - 1) + fib(number - 2);
 
-const prevFib = [];
-export function dynamicFib(n) {
+export function dynamicFib(n, prevFib = [undefined, 1, 1]) {
   if (prevFib[n]) {
     return prevFib[n];
   } else {
-    if (n <= 2) {
-      prevFib[n] = 1;
-      return prevFib[n];
-    } else {
-      if (!prevFib[n - 1]) {
-        prevFib[n - 1] = dynamicFib(n - 1);
-      }
-      if (!prevFib[n - 2]) {
-        prevFib[n - 2] = dynamicFib(n - 2);
-      }
-
-      return prevFib[n - 1] + prevFib[n - 2];
-    }
+    prevFib[n] = dynamicFib(n - 1, prevFib) + dynamicFib(n - 2, prevFib);
+    return prevFib[n];
   }
 }
