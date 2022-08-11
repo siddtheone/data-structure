@@ -9,3 +9,12 @@ export function dynamicFib(n, prevFib = [undefined, 1, 1]) {
     return prevFib[n];
   }
 }
+
+export function buttonUpFib(number, prevFib = [undefined, 1, 1]) {
+  while (!prevFib[number]) {
+    prevFib[prevFib.length] =
+      prevFib[prevFib.length - 1] + prevFib[prevFib.length - 2];
+    buttonUpFib(number, prevFib);
+  }
+  return prevFib[number];
+}

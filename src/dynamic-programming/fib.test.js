@@ -1,4 +1,4 @@
-import { dynamicFib, fib } from "./fib";
+import { buttonUpFib, dynamicFib, fib } from "./fib";
 
 test("fibonnaci series", () => {
   expect(fib(1)).toBe(1);
@@ -9,6 +9,7 @@ test("fibonnaci series", () => {
   // expect(fib(40)).toBe(55);
 
   expect(dynamicFib(100)).toBe(354224848179262000000);
+  expect(buttonUpFib(100)).toBe(354224848179262000000);
   // expect(dynamicFib(1)).toBe(1);
   // expect(dynamicFib(2)).toBe(1);
   // expect(dynamicFib(3)).toBe(2);
