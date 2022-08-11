@@ -13,7 +13,7 @@ test("fibonnaci series", () => {
   // // expect(dynamicFib(3)).toBe(2);
   // // expect(dynamicFib(4)).toBe(3);
   // // expect(dynamicFib(5)).toBe(5);
-  // // expect(dynamicFib(10)).toBe(55);
+  // expect(dynamicFib(10)).toBe(55);
   // expect(dynamicFib(20)).toBe(6765);
   // expect(dynamicFib(45)).toBe(1134903170);
 

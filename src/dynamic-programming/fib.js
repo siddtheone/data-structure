@@ -10,12 +10,14 @@ export function dynamicFib(n) {
       prevFib[n] = 1;
       return prevFib[n];
     } else {
-      const a = prevFib[n - 1] ? prevFib[n - 1] : dynamicFib(n - 1);
-      const b = prevFib[n - 2] ? prevFib[n - 2] : dynamicFib(n - 2);
+      if (!prevFib[n - 1]) {
+        prevFib[n - 1] = dynamicFib(n - 1);
+      }
+      if (!prevFib[n - 2]) {
+        prevFib[n - 2] = dynamicFib(n - 2);
+      }
 
-      prevFib[n - 1] = a;
-      prevFib[n - 2] = b;
-      return a + b;
+      return prevFib[n - 1] + prevFib[n - 2];
     }
   }
 }
