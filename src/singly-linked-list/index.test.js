@@ -1,18 +1,18 @@
 import { Node, SinglyLinkedList } from ".";
 
-test.skip("node", () => {
+test("node", () => {
   const node = new Node(5);
   expect(node).toEqual({ value: 5, next: null });
 });
 
-test.skip("push in singly linked list", () => {
+test("push in singly linked list", () => {
   const sll = new SinglyLinkedList();
   expect(sll.push(4)).toBe(1);
   expect(sll.push(5)).toBe(2);
   expect(sll.length).toBe(2);
 });
 
-test.skip("pop from singly linked list", () => {
+test("pop from singly linked list", () => {
   const sll = new SinglyLinkedList();
 
   expect(sll.pop()).toBe(undefined);
@@ -32,7 +32,7 @@ test.skip("pop from singly linked list", () => {
   expect(sll.pop()).toBe(undefined);
 });
 
-test.skip("shift from singly linked list", () => {
+test("shift from singly linked list", () => {
   const sll = new SinglyLinkedList();
 
   expect(sll.shift()).toBe(undefined);
@@ -51,7 +51,7 @@ test.skip("shift from singly linked list", () => {
   expect([sll.head, sll.tail]).toEqual([null, null]);
 });
 
-test.skip("unshift linked list", () => {
+test("unshift linked list", () => {
   const sll = new SinglyLinkedList();
   expect([sll.head, sll.tail]).toEqual([null, null]);
   expect(sll.unshift(1).length).toBe(1);
@@ -63,7 +63,7 @@ test.skip("unshift linked list", () => {
   expect(sll.tail.value).toBe(1);
 });
 
-test.skip("get linked list", () => {
+test("get linked list", () => {
   const sll = new SinglyLinkedList();
   expect(sll.get(500)).toBeUndefined();
 
@@ -78,7 +78,7 @@ test.skip("get linked list", () => {
   expect(sll.get(-1)).toBeUndefined();
 });
 
-test.skip("set linked list", () => {
+test("set linked list", () => {
   const sll = new SinglyLinkedList();
 
   sll.push(2);
@@ -95,7 +95,7 @@ test.skip("set linked list", () => {
   expect(oldLength).toBe(sll.length);
 });
 
-test.skip("insert linked list", () => {
+test("insert linked list", () => {
   const sll = new SinglyLinkedList();
   expect(sll.length).toBe(0);
 
@@ -115,7 +115,7 @@ test.skip("insert linked list", () => {
   expect(sll.insert(5, 5)).toBeFalsy();
 });
 
-describe.skip("remove from sll", () => {
+describe("remove from sll", () => {
   let sll;
   beforeEach(() => {
     sll = new SinglyLinkedList();
@@ -150,7 +150,7 @@ describe.skip("remove from sll", () => {
   });
 });
 
-test.skip("reverse", () => {
+test("reverse", () => {
   const sll = new SinglyLinkedList();
   sll.push(0);
   sll.push(1);
@@ -164,7 +164,7 @@ test.skip("reverse", () => {
   expect(sll.get(2).value).toBe(0);
 });
 
-test.skip("length getter", () => {
+test("length getter", () => {
   const sll = new SinglyLinkedList();
   sll.push(1);
   sll.push(1);

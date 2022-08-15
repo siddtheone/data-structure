@@ -44,8 +44,6 @@ export class SinglyLinkedList {
     const node = new Node(value);
     if (this.length === 0) {
       this.head = node;
-    } else if (this.length === 1) {
-      this.head.next = node;
     } else {
       this.tail.next = node;
     }
