@@ -42,6 +42,7 @@ export class SinglyLinkedList {
 
   push(value) {
     const node = new Node(value);
+
     if (this.length === 0) {
       this.head = node;
     } else {
@@ -55,22 +56,25 @@ export class SinglyLinkedList {
   pop() {
     if (this.length === 0) return undefined;
 
-    let temp = this.head;
+    let current = this.head;
     let pre;
-    while (temp.next) {
-      pre = temp;
-      temp = temp.next;
+
+    while (current.next) {
+      pre = current;
+      current = current.next;
     }
 
     if (pre) {
+      pre.next = null;
       this.tail = pre;
-      this.tail.next = null;
     } else {
       this.head = null;
       this.tail = null;
     }
 
-    return temp;
+    // this.length--;
+
+    return current;
   }
 
   shift() {
@@ -80,6 +84,7 @@ export class SinglyLinkedList {
     if (this.length === 0) {
       this.tail = null;
     }
+    temp.next = null;
     return temp;
   }
 
@@ -87,13 +92,12 @@ export class SinglyLinkedList {
     const node = new Node(value);
 
     if (this.length === 0) {
-      this.head = node;
       this.tail = node;
     } else {
       node.next = this.head;
-      this.head = node;
     }
-    return this;
+    this.head = node;
+    return this.length;
   }
 
   get(index) {
@@ -108,13 +112,13 @@ export class SinglyLinkedList {
   }
 
   set(index, value) {
-    const oldNode = this.get(index);
+    const atIndex = this.get(index);
 
-    if (oldNode) {
-      oldNode.value = value;
-      return oldNode;
+    if (atIndex) {
+      atIndex.value = value;
     }
-    return false;
+
+    return atIndex;
   }
 
   insert(index, value) {
@@ -146,10 +150,12 @@ export class SinglyLinkedList {
     if (index === this.length - 1) return this.pop();
 
     const pre = this.get(index - 1);
-    const temp = pre.next;
-    pre.next = pre.next.next;
+    const toRemove = this.get(index);
+    pre.next = toRemove.next;
 
-    return temp;
+    toRemove.next = null;
+
+    return toRemove;
   }
 
   get length() {

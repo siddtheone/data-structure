@@ -41,7 +41,10 @@ test("shift from singly linked list", () => {
   sll.push(3);
   sll.push(4);
 
-  expect(sll.shift().value).toBe(1);
+  const firstShiftRes = sll.shift();
+  expect(firstShiftRes.value).toBe(1);
+  expect(firstShiftRes.next).toBe(null);
+
   expect(sll.shift().value).toBe(2);
   expect(sll.length).toBe(2);
   expect(sll.shift().value).toBe(3);
@@ -54,13 +57,17 @@ test("shift from singly linked list", () => {
 test("unshift linked list", () => {
   const sll = new SinglyLinkedList();
   expect([sll.head, sll.tail]).toEqual([null, null]);
-  expect(sll.unshift(1).length).toBe(1);
+  expect(sll.unshift(1)).toBe(1);
   expect(sll.head.value).toBe(1);
   expect(sll.tail.value).toBe(1);
+  expect(sll.head.next).toBeNull();
+  expect(sll.tail.next).toBeNull();
 
-  expect(sll.unshift(0).length).toBe(2);
+  expect(sll.unshift(0)).toBe(2);
   expect(sll.head.value).toBe(0);
+  expect(sll.head.next).toBe(sll.tail);
   expect(sll.tail.value).toBe(1);
+  expect(sll.tail.next).toBeNull();
 });
 
 test("get linked list", () => {
@@ -125,13 +132,17 @@ describe("remove from sll", () => {
   });
 
   it("removed from the beginning", () => {
-    expect(sll.remove(0).value).toBe(0);
+    const removedNode = sll.remove(0);
+    expect(removedNode.value).toBe(0);
+    expect(removedNode.next).toBe(null);
     expect(sll.length).toBe(2);
     expect(sll.get(0).value).toBe(1);
   });
 
   it("removed from the middle", () => {
-    expect(sll.remove(1).value).toBe(1);
+    const removedNode = sll.remove(1);
+    expect(removedNode.value).toBe(1);
+    expect(removedNode.next).toBe(null);
     expect(sll.length).toBe(2);
     expect(sll.get(1).value).toBe(2);
   });
