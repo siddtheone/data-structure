@@ -1,13 +1,13 @@
 import { DoublyLinkedList, Node } from ".";
 
-describe.skip("insertion on doubly linked list", () => {
+describe("insertion on doubly linked list", () => {
   let dll;
 
   beforeEach(() => {
     dll = new DoublyLinkedList();
   });
 
-  it("reverse the list", () => {
+  it("reverse the list of 4", () => {
     for (let i = 0; i < 4; i++) {
       dll.push(i);
     }
@@ -24,6 +24,29 @@ describe.skip("insertion on doubly linked list", () => {
     expect(dll.tail.prev.value).toBe(1);
     expect(dll.tail.prev.prev.value).toBe(2);
     expect(dll.tail.prev.prev.prev.value).toBe(3);
+  });
+
+  it("reverse the list of 3", () => {
+    for (let i = 0; i < 3; i++) {
+      dll.push(i);
+    }
+
+    dll.reverse();
+    expect(dll.head.prev).toBeNull();
+    expect(dll.head.value).toBe(2);
+    expect(dll.head.next.value).toBe(1);
+    expect(dll.head.next.next.value).toBe(0);
+
+    expect(dll.tail.next).toBeNull();
+    expect(dll.tail.value).toBe(0);
+    expect(dll.tail.prev.value).toBe(1);
+    expect(dll.tail.prev.prev.value).toBe(2);
+  });
+
+  it("reverse the empty list", () => {
+    dll.reverse();
+    expect(dll.head).toBeNull();
+    expect(dll.tail).toBeNull();
   });
 
   it("inserting at invalid index returns false", () => {
@@ -70,7 +93,7 @@ describe.skip("insertion on doubly linked list", () => {
   });
 });
 
-describe.skip("doubly linked list", () => {
+describe("doubly linked list", () => {
   let dll;
 
   beforeEach(() => {
@@ -221,12 +244,12 @@ describe.skip("doubly linked list", () => {
   });
 });
 
-it.skip("test Doubly linked list instance", () => {
+it("test Doubly linked list instance", () => {
   const node = new DoublyLinkedList(2);
   expect(node).toEqual({ length: 0, head: null, tail: null });
 });
 
-it.skip("test node instance", () => {
+it("test node instance", () => {
   const node = new Node(2);
   expect(node).toEqual({ value: 2, next: null, prev: null });
 });

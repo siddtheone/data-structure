@@ -16,12 +16,14 @@ export class DoublyLinkedList {
     }
 
     // Recursive
-    // if (this.length < 2) return this;
-    // const shifted = this.shift();
-    // const popped = this.pop();
-    // if (this.length > 1) this.reverse();
-    // this.unshift(popped.value);
-    // this.push(shifted.value);
+    // if (this.length >= 2) {
+    //   const shifted = this.shift();
+    //   const popped = this.pop();
+    //   if (this.length > 1) this.reverse();
+    //   this.unshift(popped.value);
+    //   this.push(shifted.value);
+    // }
+    // return this;
   }
 
   remove(index) {
